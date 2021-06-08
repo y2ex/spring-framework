@@ -1,10 +1,48 @@
 package cc.y2ex.ioc.beans;
 
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+
 /**
  * @author Yanci丶
  * @date 2021-06-07
  */
-public class User {
+//@Scope("prototype")
+@Component
+//@DependsOn("member")
+public class User implements InitializingBean {
 
+	private String username;
+
+	private String password;
+
+	public void init(){
+		System.out.println("user init 初始化");
+	}
+
+	@Bean(initMethod = "initMethod")
+	public void initMethod(){
+		System.out.println("user initMethod 初始化");
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		System.out.println("user afterPropertiesSet 初始化");
+	}
+
+	@PostConstruct
+	public void initMethodPostConstruct(){
+		System.out.println("user initMethodPostConstruct 初始化");
+	}
 
 }
