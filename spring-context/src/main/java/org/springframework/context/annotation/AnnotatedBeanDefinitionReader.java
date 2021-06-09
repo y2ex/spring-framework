@@ -68,6 +68,7 @@ public class AnnotatedBeanDefinitionReader {
 	 * @see #setEnvironment(Environment)
 	 */
 	public AnnotatedBeanDefinitionReader(BeanDefinitionRegistry registry) {
+		// Environment表示环境变量，包含了系统环境变量以及JVM启动参数
 		this(registry, getOrCreateEnvironment(registry));
 	}
 
@@ -85,6 +86,12 @@ public class AnnotatedBeanDefinitionReader {
 		Assert.notNull(environment, "Environment must not be null");
 		this.registry = registry;
 		this.conditionEvaluator = new ConditionEvaluator(registry, environment, null);
+		// 设置beanFactory的OrderComparator，设置自动装配候选者解析器，生成并注册5个BeanDefinition
+		// 1.ConfigurationClassPostProcessor
+		// 2.AutowiredAnnotationBeanPostProcessor
+		// 3.CommonAnnotationBeanPostProcessor
+		// 4.EventListenerMethodProcessor
+		// 5.DefaultEventListenerFactory
 		AnnotationConfigUtils.registerAnnotationConfigProcessors(this.registry);
 	}
 

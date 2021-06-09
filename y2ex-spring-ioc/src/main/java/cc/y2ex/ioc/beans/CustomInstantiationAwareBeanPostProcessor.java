@@ -20,4 +20,13 @@ public class CustomInstantiationAwareBeanPostProcessor implements InstantiationA
 //		}
 		return null;
 	}
+
+	@Override
+	public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
+		System.out.println("CustomInstantiationAwareBeanPostProcessor------实例化后操作， beanName:"+beanName);
+		if (beanName.equals("user")){
+			return false;
+		}
+		return true;
+	}
 }

@@ -18,4 +18,12 @@ public class Order {
 	public void getMemberInfo(){
 		System.out.println(member);
 	}
+
+	@Override
+	public String toString() {
+		return "Order{" +
+				"member=" + member +
+				", orderNo='" + orderNo + '\'' +
+				'}';
+	}
 }
