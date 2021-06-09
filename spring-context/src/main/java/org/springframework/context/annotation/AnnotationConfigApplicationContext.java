@@ -63,7 +63,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 	 * through {@link #register} calls and then manually {@linkplain #refresh refreshed}.
 	 */
 	public AnnotationConfigApplicationContext() {
+		// 主要作用添加一些基础的PostProcessor，同时可以通过reader进行BeanDefinition的注册，同时对BeanFactory进行设置和添加PostProcessor
 		this.reader = new AnnotatedBeanDefinitionReader(this);
+		// 主要作用可以用来扫描得到并注册BeanDefinition，同时进行设置includeFilters，environment，resourceLoader
 		this.scanner = new ClassPathBeanDefinitionScanner(this);
 	}
 
@@ -88,7 +90,9 @@ public class AnnotationConfigApplicationContext extends GenericApplicationContex
 		// 2. 生成AnnotatedBeanDefinitionReader
 		// 3. 生成ClassPathBeanDefinitionScanner
 		this();
+		// 利用reader将传入的配置类注册为BeanDefinition，类型为AnnotatedGenericBeanDefinition
 		register(componentClasses);
+		// GenericApplicationContext只能调用一次refresh方法，第二次时会报错
 		refresh();
 	}
 
