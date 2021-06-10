@@ -2,6 +2,7 @@ package cc.y2ex.ioc.beans;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
+import org.springframework.core.PriorityOrdered;
 import org.springframework.stereotype.Component;
 
 /**
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @date 2021-06-08
  */
 @Component
-public class CustomInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
+public class CustomInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor, PriorityOrdered {
 
 	@Override
 	public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
@@ -28,5 +29,10 @@ public class CustomInstantiationAwareBeanPostProcessor implements InstantiationA
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int getOrder() {
+		return 6;
 	}
 }
