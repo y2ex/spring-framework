@@ -281,7 +281,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 			// Check if bean definition exists in this factory.
 			// 获取父BeanFactory
 			BeanFactory parentBeanFactory = getParentBeanFactory();
-			// 如果parentBeanFactory不为空，并且当前BeanFactory不包含该beanName对应的BeanDefinition，那么则从parentBeanFactory中去获取
+			// 如果parentBeanFactory不为空，                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ，那么则从parentBeanFactory中去获取
 			if (parentBeanFactory != null && !containsBeanDefinition(beanName)) {
 				// Not found -> check parent.
 				String nameToLookup = originalBeanName(name);
@@ -323,11 +323,9 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 							throw new BeanCreationException(mbd.getResourceDescription(), beanName,
 									"Circular depends-on relationship between '" + beanName + "' and '" + dep + "'");
 						}
-						/**
-						 * 存在两个map；dependentBeanMap、dependenciesForBeanMap
-						 * dependentBeanMap：依赖我的
-						 * dependenciesForBeanMap：我依赖的
-						 */
+						// 存在两个map；dependentBeanMap、dependenciesForBeanMap
+						// dependentBeanMap：依赖我的
+						// dependenciesForBeanMap：我依赖的
 						registerDependentBean(dep, beanName);
 						try {
 							getBean(dep);
