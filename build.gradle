@@ -17,6 +17,7 @@ apply from: "$rootDir/gradle/build-scan-user-data.gradle"
 ext {
 	moduleProjects = subprojects.findAll { it.name.startsWith("spring-") }
 	javaProjects = subprojects - project(":framework-bom")
+	aspectjVersion = "1.8.14"
 	withoutJclOverSlf4j = {
 		exclude group: "org.slf4j", name: "jcl-over-slf4j"
 	}
@@ -350,6 +351,7 @@ configure([rootProject] + javaProjects) { project ->
 		compileOnly("com.google.code.findbugs:jsr305")
 		testCompileOnly("com.google.code.findbugs:jsr305")
 		checkstyle("io.spring.javaformat:spring-javaformat-checkstyle:0.0.15")
+		testCompile("org.aspectj:aspectjweaver:${aspectjVersion}")
 	}
 
 	ext.javadocLinks = [

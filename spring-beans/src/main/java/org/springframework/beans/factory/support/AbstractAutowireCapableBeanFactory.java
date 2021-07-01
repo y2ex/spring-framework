@@ -502,7 +502,11 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 
 		try {
 			// Give BeanPostProcessors a chance to return a proxy instead of the target bean instance.
-			// 1.实例化前。让BeanPostProcessors有机会返回一个代理而不是目标bean实例
+			//
+			/**
+			 * 1.实例化前。让BeanPostProcessors有机会返回一个代理而不是目标bean实例
+			 * 第一次调用BeanPostProcessors
+			 */
 			Object bean = resolveBeforeInstantiation(beanName, mbdToUse);
 			if (bean != null) {
 				// 如果实例化前操作这里返回了bean，则不执行spring自带的创建bean流程，直接跳到初始化后阶段
@@ -594,8 +598,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 						"' to allow for resolving potential circular references");
 			}
 			// 此时的bean还没有完成属性注入，是一个非常简单的对象
-			// 构造一个对象工厂添加到singletonFactories中
-			// 调用后置处理器
+			// 将一个lambda表达式添加到三级缓存singletonFactories中（），此时lambda表达式还没有执行
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
